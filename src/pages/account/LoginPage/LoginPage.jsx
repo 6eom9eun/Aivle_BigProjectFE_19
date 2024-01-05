@@ -5,10 +5,10 @@ import Description from './Description'
 
 function LoginPage({setIsLogin}) {
   return (
-    <div style={{padding:'63px'}}>
-        <section style={{ width: '100%', height: '75vh', display: 'flex', flexDirection: 'column' }} >
+    <div className='pt-[63px] min-h-screen'>
+        <section style={{ width: '100%', height: 'calc(100vh - 63px)', display: 'flex', flexDirection: 'column' }} >
 
-            <div style= {{ flex: '1', display:'flex' }}>
+            <div className='flex flex-1'>
                 <Description />
                 <LoginForm setIsLogin={setIsLogin} />
             </div>

@@ -55,7 +55,7 @@ function SignupForm() {
 
 
         try {
-          const response = await axios.post('http://127.0.0.1:8000/accounts/signup/', req, {
+          const response = await axios.post(process.env.REACT_APP_API_URL + '/accounts/signup/', req, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -76,8 +76,9 @@ function SignupForm() {
     }
     return (
         <div style={{ 
-            flexBasis: '50%', alignItems: 'center', justifyContent: 'center', 
-            display:'flex', flexDirection:'column' }}>
+            alignItems: 'center', justifyContent: 'center', 
+            display:'flex', flexDirection:'column' }}
+            className='lg:w-[50%] w-full p-2'>
             <div>
             <span className='font-semibold'>회원가입</span>
             </div>    
@@ -130,7 +131,7 @@ function SignupForm() {
                 {!passwordsMatch && <p className='text-sm font-semibold' style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</p>}
                 </div>
             </div>
-            <button onClick={onSubmitHandler} disabled={!passwordsMatch} className='py-2 w-full px-3 rounded-md text-white font-semibold bg-indigo-600 border border-indigo-600 hover:text-indigo-600 hover:bg-white'>
+            <button onClick={onSubmitHandler} disabled={!passwordsMatch} className='py-2 w-full px-3 rounded-md text-white font-semibold bg-[var(--color-primary-500)] border border-[var(--color-primary-500)] hover:text-[var(--color-primary-500)] hover:bg-white'>
                 회원가입
             </button> 
             </form>

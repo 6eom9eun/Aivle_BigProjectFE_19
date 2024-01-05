@@ -21,7 +21,7 @@ function LoginForm({setIsLogin}) {
     const onSubmitHandler = (e) => {
         e.preventDefault()
 
-        const url = "http://127.0.0.1:8000/accounts/login/";
+        const url = process.env.REACT_APP_API_URL + "/accounts/login/";
         const req = {
             'username': Id,
             'password': Password,
@@ -44,35 +44,38 @@ function LoginForm({setIsLogin}) {
 
     return (
         <div style={{ 
-            flexBasis: '50%', alignItems: 'center', justifyContent: 'center', 
-            display:'flex', flexDirection:'column' }}>
+            alignItems: 'center', justifyContent: 'center', 
+            display:'flex', flexDirection:'column' }}
+            className='lg:w-[50%] w-full p-2'>
             
             <h3 className="font-semibold">환영합니다!</h3>
             <h3 className="font-semibold">귀하의 계정에 로그인하십시오</h3>
             
             <form style={{ display:'flex', flexDirection:'column' }} className="w-full max-w-sm font-semibold">
-              <div className="w-full px-3">
+              <div className="w-full">
                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for='grid-id'>
                 아이디
                 </label>
                 <input value={Id} onChange={onIdHandler} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-id" type="text" placeholder="Your ID" />
 
               </div>
-                <div className="w-full px-3">
+                <div className="w-full">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
                   비밀번호
                   </label>
                   <input value={Password} onChange={onPasswordHandler} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="password" placeholder="******************" />
                 </div>
                 <br />
-              <button onClick={onSubmitHandler} className='py-2 px-3 rounded-md text-white font-semibold bg-indigo-600 border border-indigo-600 hover:text-indigo-600 hover:bg-white' >
+              <button onClick={onSubmitHandler} className='py-2 rounded-md text-white font-semibold bg-[var(--color-primary-500)] border border-[var(--color-primary-500)] hover:text-[var(--color-primary-500)] hover:bg-white' >
                     로그인
                 </button>
                 {/* {error && <div style={{ color: 'red' }}>{error}</div>} */}
   
             </form>
-            <span style={{color:'grey'}}>아직 계정이 없으신가요?</span>
-            <a href='/signup' className='text-sm "text-blue-600 visited:text-purple-600 ..."'>회원가입</a>
+            <div className='mt-2 flex align-middle'>
+                <span style={{color:'grey'}}>아직 계정이 없으신가요?</span>
+                <a href='/signup' className='ml-2 text-blue-600 visited:text-purple-600 ...'>회원가입</a>
+            </div>
         </div>
     )
 }

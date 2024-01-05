@@ -54,7 +54,7 @@
   /* padding: 1.25rem; */
   padding-top: 63px; /* 상단 header의 height */
   width: calc(100%);
-  height: 100vh;
+  min-height: 100vh;
   background-color: var(--color-primary-200);
 }
 
