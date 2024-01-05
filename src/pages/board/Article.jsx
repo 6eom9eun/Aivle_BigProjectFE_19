@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Textarea, User, useDisclosure } from "@nextui-org/react";
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Textarea, User, useDisclosure, Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import MDEditor from '@uiw/react-md-editor';
-import rehypeSanitize from "rehype-sanitize";
+import UserProfile from "./UserProfile";
 
 function Article() {
   const {postId} = useParams();
@@ -157,11 +157,20 @@ function Article() {
           <h1 style={{fontSize: "3em", fontWeight: 'bold'}}>{articleData.title}</h1>
         </div>
         <br />
-        <span className="user">{articleData.user}</span>
+        <Popover placement="right">
+          <PopoverTrigger>
+            <span className="user">{articleData.username}</span>
+          </PopoverTrigger>
+          <PopoverContent>
+            <div className="px-1 py-2">
+              <UserProfile userId={articleData.user_id} token={token}/>
+            </div>
+          </PopoverContent>
+        </Popover>
         <span> · </span>
         <span>{new Date(articleData.created_at).toLocaleString()}</span>
         <div style={{ float: 'right' }}>
-        {loginUser === articleData.user && (
+        {loginUser === articleData.username && (
           <>
           <span onClick={() => nav('/board/update')} className="user" style={{color: '#6B7270', paddingRight: '10px', fontSize: '0.9em'}}>수정</span>
           <>
@@ -202,9 +211,6 @@ function Article() {
         <MDEditor.Markdown 
           source={articleData.content} 
           style={{whiteSpace: 'pre-wrap'}}
-          previewOptions={{
-            rehypePlugins: [[rehypeSanitize]],
-          }} 
         />
       </div>
       <hr />
@@ -226,13 +232,23 @@ function Article() {
       <div>
         {commentData.map((comment) => (
           <div key={comment.comment_id} style={{paddingBottom:'30px', position: 'relative'}}>
-            <User   
-              name={comment.user}
-              description={new Date(comment.created_at).toLocaleString()}
-              avatarProps= {{
-                src: `http://127.0.0.1:8000${comment.image}`
-              }}
-            />
+            <Popover placement="left">
+              <PopoverTrigger>
+                <User   
+                  name={comment.username}
+                  description={new Date(comment.created_at).toLocaleString()}
+                  avatarProps= {{
+                    src: `http://127.0.0.1:8000${comment.image}`
+                  }}
+                  style={{ cursor: "pointer" }}
+                />
+                </PopoverTrigger>
+              <PopoverContent>
+                <div className="px-1 py-2">
+                  <UserProfile userId={comment.user_id} token={token}/>
+                </div>
+              </PopoverContent>
+            </Popover>
           
           {editing[comment.comment_id] ? (
             <Textarea
@@ -251,7 +267,7 @@ function Article() {
           )}
 
           <div style={{position: 'absolute', top: 25, right: 0, display: 'flex', fontSize:'small'}}>
-          {comment.user === loginUser && (
+          {comment.username === loginUser && (
             <>
               {editing[comment.comment_id] ? (
                 <>

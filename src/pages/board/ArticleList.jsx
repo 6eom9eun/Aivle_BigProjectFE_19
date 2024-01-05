@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Pagination, getKeyValue, Button} from "@nextui-org/react";
+import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Pagination, getKeyValue, Button, Popover, PopoverTrigger, PopoverContent} from "@nextui-org/react";
+import UserProfile from "./UserProfile";
+
 
 function ArticleList() {
     const nav = useNavigate();
     const [articleData, setArticleData] = useState([]);
     const token = sessionStorage.getItem('aivle19_token')
+    const [profiles, setProfiles] = useState(null);
 
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/board/', {
@@ -22,12 +25,12 @@ function ArticleList() {
         });
     }, []);
 
-    const [page, setPage] = React.useState(1);
+    const [page, setPage] = useState(1);
     const rowsPerPage = 10;
 
     const pages = Math.ceil(articleData.length / rowsPerPage);
 
-    const items = React.useMemo(() => {
+    const items = useMemo(() => {
         const start = (page - 1) * rowsPerPage;
         const end = start + rowsPerPage;
 
@@ -69,7 +72,7 @@ function ArticleList() {
         >
             <TableHeader>
                 <TableColumn style={{display: 'flex', justifyContent: 'right', alignItems: 'center', paddingRight:'450px', paddingLeft:"189px"}} key="title">글 제목</TableColumn>
-                <TableColumn key="user">작성자</TableColumn>
+                <TableColumn key="username">작성자</TableColumn>
                 <TableColumn style={{paddingLeft:'70px'}} key="created_at">작성 시간</TableColumn>
             </TableHeader>
             <TableBody items={items}>
@@ -77,14 +80,30 @@ function ArticleList() {
                 <TableRow className="cell-hover" key={item.post_id}>
                     {(columnKey) => 
                     <TableCell 
-                        style={columnKey === 'title' ? {display: 'flex', justifyContent: 'center', alignItems: 'center'} : {}}
-                        onClick ={() => {
-                        if (columnKey === 'title') {
-                            nav(`/board/${item.post_id}`);
-                            }
-                        }}>
-                        {columnKey === 'created_at' ? new Date(getKeyValue(item, columnKey)).toLocaleString() : getKeyValue(item, columnKey)}
-                    </TableCell>}
+                    style={columnKey === 'title' ? {display: 'flex', justifyContent: 'center', alignItems: 'center'} : {}}
+                    onClick ={() => {
+                      if (columnKey === 'title') {
+                        nav(`/board/${item.post_id}`);
+                      }
+                    }}
+                  >
+                    {columnKey === 'created_at' ? new Date(getKeyValue(item, columnKey)).toLocaleString() : 
+                      columnKey === 'username' ? 
+                      <Popover placement="right">
+                      <PopoverTrigger>
+                        <span>{getKeyValue(item, columnKey)}</span>
+                      </PopoverTrigger>
+                      <PopoverContent>
+                        <div className="px-1 py-2">
+                          <UserProfile userId={item.user_id} token={token}/>
+                        </div>
+                      </PopoverContent>
+                    </Popover> 
+                        : 
+                        getKeyValue(item, columnKey)
+                    }
+                  </TableCell>
+                    }
                 </TableRow>
                 )}
             </TableBody>

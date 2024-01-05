@@ -1,10 +1,15 @@
-import React from "react";
-import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Spinner, Button} from "@nextui-org/react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Spinner, Button, Popover, PopoverTrigger, PopoverContent} from "@nextui-org/react";
 import {useAsyncList} from "@react-stately/data";
+import UserProfile2 from "../board/UserProfile2";
 
 function RankPage() {
-    const [page, setPage] = React.useState(1);
-    const [isLoading, setIsLoading] = React.useState(true);
+    const [page, setPage] = useState(1);
+    const [isLoading, setIsLoading] = useState(true);
+    const token = sessionStorage.getItem('aivle19_token');
+    const [profiles, setProfiles] = useState({});
+
 
     let list = useAsyncList({
     async load({signal, cursor}) {
@@ -12,8 +17,6 @@ function RankPage() {
         setPage((prev) => prev + 1);
       }
 
-      // If no cursor is available, then we're loading the first page.
-      // Otherwise, the cursor is the next URL to load, as returned from the previous page.
       const res = await fetch(cursor || "http://127.0.0.1:8000/rank/", {signal});
       let json = await res.json();
       console.log(json);
@@ -30,6 +33,7 @@ function RankPage() {
   });
 
   const hasMore = page < 9;
+
   return (
     <div style={{padding:'63px'}}>
         <Table
@@ -49,8 +53,8 @@ function RankPage() {
           }}
         >
         <TableHeader>
-          <TableColumn style={{paddingLeft:'92px'}} key="rank">순위</TableColumn>
-          <TableColumn style={{paddingLeft:'88px'}} key="user">아이디</TableColumn>
+          <TableColumn style={{paddingLeft:'95px'}} key="rank">순위</TableColumn>
+          <TableColumn style={{paddingLeft:'102px'}} key="username">아이디</TableColumn>
           <TableColumn style={{paddingLeft:'92px'}} key="user_level">레벨</TableColumn>
           <TableColumn style={{paddingLeft:'145px'}} key="created_dt">클리어 시간</TableColumn>
         </TableHeader>
@@ -60,15 +64,26 @@ function RankPage() {
           loadingContent={<Spinner label="Loading..." />}
         >
           {(item, index) => (
-            <TableRow key={item.user}>
+            <TableRow key={item.user_id}>
               {(columnKey, cellIndex) => 
                 <TableCell style={{paddingLeft:'100px'}}>
-                  {columnKey === 'rank' ? (item.rank <= 3 ? '👑' : getKeyValue(item, columnKey)) : columnKey === 'created_dt' ? new Date(getKeyValue(item, columnKey)).toLocaleString() : getKeyValue(item, columnKey)}
-                </TableCell>}
-            </TableRow>
-          )}
-          </TableBody>
-        </Table>
+                {columnKey === 'username' ? ( 
+                  <Popover placement="right">
+                    <PopoverTrigger>
+                      <span>{getKeyValue(item, columnKey)}</span>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <div className="px-1 py-2">
+                        <UserProfile2 userId={item.user_id} token={token} profiles={profiles} setProfiles={setProfiles}/>
+                      </div>
+                    </PopoverContent>
+                  </Popover>
+                ) : columnKey === 'rank' ? (item.rank <= 3 ? '👑' : getKeyValue(item, columnKey)) : columnKey === 'created_dt' ? new Date(getKeyValue(item, columnKey)).toLocaleString() : getKeyValue(item, columnKey)}
+              </TableCell>}
+          </TableRow>
+        )}
+      </TableBody>
+      </Table>
     </div>
   )
 }

@@ -3,6 +3,7 @@ import { Input, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button
 import MDEditor from '@uiw/react-md-editor';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import rehypeSanitize from "rehype-sanitize";
 
 function CreateArticle() {
   const token = sessionStorage.getItem('aivle19_token');
@@ -86,6 +87,9 @@ function CreateArticle() {
         value={content}
         onChange={onContentHandler}
         style={{ whiteSpace: 'pre-wrap' }}
+        previewOptions={{
+          rehypePlugins: [[rehypeSanitize]],
+        }} 
         onDrop={(files) => onDropHandler(files)}
       />
 
