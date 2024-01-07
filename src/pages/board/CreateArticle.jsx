@@ -22,20 +22,21 @@ function CreateArticle() {
   };
 
   const onDropHandler = async (files) => {
+    console.log(files)
     const formData = new FormData();
     formData.append('image', files[0]);
 
     try {
-      const response = await axios.post('YOUR_UPLOAD_API_ENDPOINT', formData, {
+      const response = await axios.post('http://127.0.0.1:8000/board/image-upload/', formData, {
         headers: {
           'Authorization': `Token ${token}`,
           'Content-Type': 'multipart/form-data',
         },
       });
-      const imageUrl = response.data.url; // Assuming your API returns the URL of the uploaded image
+      const imageUrl = response.data.image_url; // Assuming your API returns the URL of the uploaded image
 
       // Append the image URL to the content
-      const newContent = `${content}![Alt text](${imageUrl})`;
+      const newContent = `${content}![Alt text](http://127.0.0.1:8000${imageUrl})`;
       setContent(newContent);
     } catch (error) {
       console.error('Image upload error:', error);
@@ -68,7 +69,7 @@ function CreateArticle() {
   };
 
   return (
-    <div data-color-mode="light" style={{ padding: '83px' }}>
+    <div data-color-mode="light" style={{ padding: '83px', fontFamily: 'JalnanGothic' }}>
       <div className="w-1/2 flex flex-col gap-4" style={{ paddingBottom: '50px' }}>
         <div className="flex w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
           <Input
@@ -82,16 +83,25 @@ function CreateArticle() {
         </div>
       </div>
 
-      <MDEditor
-        height="60vh"
-        value={content}
-        onChange={onContentHandler}
-        style={{ whiteSpace: 'pre-wrap' }}
-        previewOptions={{
-          rehypePlugins: [[rehypeSanitize]],
-        }} 
-        onDrop={(files) => onDropHandler(files)}
-      />
+      <div onDrop={e => {
+        e.preventDefault();
+        e.stopPropagation();
+        const files = e.dataTransfer.files;
+        if (files && files.length > 0) {
+          onDropHandler(files);
+        }
+      }}>
+        <MDEditor
+          height="60vh"
+          value={content}
+          onChange={onContentHandler}
+          style={{ whiteSpace: 'pre-wrap' }}
+          previewOptions={{
+            rehypePlugins: [[rehypeSanitize]],
+          }} 
+          onDrop={(files) => onDropHandler(files)}
+        />
+      </div>
 
       <div
         style={{ paddingTop: '17px', paddingLeft: '455px' }}
@@ -101,7 +111,7 @@ function CreateArticle() {
           <Button onPress={onOpenCancel} type="button" color="secondary" variant="light">
             취소
           </Button>
-          <Modal isOpen={isCancelOpen} onOpenChange={onOpenChangeCancel} backdrop="Transparent">
+          <Modal isOpen={isCancelOpen} onOpenChange={onOpenChangeCancel} backdrop="Transparent" style={{fontFamily: 'JalnanGothic'}}>
             <ModalContent>
               {(onClose) => (
                 <>
@@ -131,7 +141,7 @@ function CreateArticle() {
           <Button onPress={onOpenSave} type="button" color="secondary">
             저장
           </Button>
-          <Modal isOpen={isSaveOpen} onOpenChange={onOpenChangeSave} backdrop="Transparent">
+          <Modal isOpen={isSaveOpen} onOpenChange={onOpenChangeSave} backdrop="Transparent" style={{fontFamily: 'JalnanGothic'}}>
             <ModalContent>
               {(onClose) => (
                 <>

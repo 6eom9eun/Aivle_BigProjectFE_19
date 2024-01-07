@@ -4,17 +4,16 @@ import { delay, dateToTimestamp } from '../../../utils';
 import { IoSend } from "react-icons/io5";
 import axios from 'axios';
 
-const sentence = {
-    "sentence": "내 친구는 간지 넘치는 스타일을 가지고 있다."
-}
-
-const MessageForm = ({ quizId, word, quiz, correctAnswer, setCorrectAnswer, messages, setMessages, messageFormRef, step, setStep, aiIsTalking, setAiIsTalking, writingWords }) => {
+const MessageForm = ({ quizId, word, quiz,
+    correctAnswer, setCorrectAnswer, studySentence, setStudySentence,
+    messages, setMessages, messageFormRef, step, setStep, aiIsTalking,
+    setAiIsTalking, writingWords }) => {
     const token = sessionStorage.getItem('aivle19_token');
     const username = sessionStorage.getItem('aivle19_username');
 
     const [updateSolvedDateDidMount, setUpdateSolvedDateDidMount] = useState(false);
     const [message, setMessage] = useState('');
-    const [studySentence, setStudySentence] = useState(sentence);
+    const [audioUrl, setAudioUrl] = useState();
 
     useEffect(() => {
         switch (step) {
@@ -204,7 +203,7 @@ const MessageForm = ({ quizId, word, quiz, correctAnswer, setCorrectAnswer, mess
         // generate Sentence And Provide TTS
         const response = generateSentence();
         if ((await response).status === 200) {
-            setStudySentence((await response).data);
+            setStudySentence((await response).data.sentence);
             const tmpSentence = (await response).data.sentence;
 
             // tts 요청
@@ -212,6 +211,7 @@ const MessageForm = ({ quizId, word, quiz, correctAnswer, setCorrectAnswer, mess
             if ((await ttsResponse).status === 200) {
                 const tmpAudioBlob = new Blob([(await ttsResponse).data]);
                 const tmpAudioUrl = URL.createObjectURL(tmpAudioBlob);
+                setAudioUrl(tmpAudioUrl);
                 setMessages((prevMessages) => [
                     ...prevMessages,
                     { text: `📝 "${tmpSentence}"`, isUser: false, mode: 'tts', audioUrl: tmpAudioUrl, id: Date.now(), step: step },
@@ -228,17 +228,22 @@ const MessageForm = ({ quizId, word, quiz, correctAnswer, setCorrectAnswer, mess
     }
 
     const studyHandWriting2 = async () => {
+        await delay();
         addAiMessage(`사진에서 해당 문장을 찾지 못했습니다. 재작성하거나 재촬영 후 재업로드 해주세요.`);
         setAiIsTalking(false);
 
         setMessages((prevMessages) => [
             ...prevMessages,
-            { isUser: false, mode: 'handwriting', id: Date.now(), step: step },
-        ]);
+            { text: `📝 "${studySentence}"`, isUser: false, mode: 'tts', audioUrl: audioUrl, id: Date.now(), step: step },
+            { isUser: false, mode: 'handwriting', id: Date.now(), step: step - 1 },
+        ]); // 사용자 편의를 위해 문장에 대한 내용 다시 노출
         setStep(200);
     }
     
     const studyReading = async () => {
+        await delay();
+        addAiMessage(`✅`);
+        await delay();
         addAiMessage(`확인되었습니다. 훌륭하게 수행하셨군요!`);
         await delay();
         addAiMessage(`다음은 '읽기' 과정을 진행합니다. 다음 주어지는 문장을 소리 내어 읽어보세요.\n\n(※ 문장 생성에 5 ~ 10초가량 시간이 소요됩니다.)`);
@@ -246,7 +251,7 @@ const MessageForm = ({ quizId, word, quiz, correctAnswer, setCorrectAnswer, mess
         // generate Sentence And Provide TTS
         const response = generateSentence();
         if ((await response).status === 200) {
-            setStudySentence((await response).data);
+            setStudySentence((await response).data.sentence);
             const tmpSentence = (await response).data.sentence;
 
             // tts 요청
@@ -254,6 +259,7 @@ const MessageForm = ({ quizId, word, quiz, correctAnswer, setCorrectAnswer, mess
             if ((await ttsResponse).status === 200) {
                 const tmpAudioBlob = new Blob([(await ttsResponse).data]);
                 const tmpAudioUrl = URL.createObjectURL(tmpAudioBlob);
+                setAudioUrl(tmpAudioUrl);
                 setMessages((prevMessages) => [
                     ...prevMessages,
                     { text: `🎙️ "${tmpSentence}"`, isUser: false, mode: 'tts', audioUrl: tmpAudioUrl, id: Date.now(), step: step },
@@ -270,17 +276,22 @@ const MessageForm = ({ quizId, word, quiz, correctAnswer, setCorrectAnswer, mess
     }
 
     const studyReading2 = async () => {
+        await delay();
         addAiMessage(`음성에서 해당 문장을 인식하지 못했습니다. 재녹음 후 재업로드 해주세요.`);
         setAiIsTalking(false);
 
         setMessages((prevMessages) => [
             ...prevMessages,
-            { isUser: false, mode: 'reading', id: Date.now(), step: step },
-        ]);
+            { text: `🎙️ "${studySentence}"`, isUser: false, mode: 'tts', audioUrl: audioUrl, id: Date.now(), step: step },
+            { isUser: false, mode: 'reading', id: Date.now(), step: step - 1 },
+        ]); // 사용자 편의를 위해 문장에 대한 내용 다시 노출
         setStep(300);
     }
     
     const endOfReading = async () => {
+        await delay();
+        addAiMessage(`✅`);
+        await delay();
         addAiMessage(`확인되었습니다. 훌륭하게 수행하셨군요!`);
         await delay();
         addAiMessage(`👏`);

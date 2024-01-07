@@ -69,7 +69,7 @@ const TermsOfUseForm = ({setShowSignupForm}) => {
 
   const Table = ({ termsOfUse }) => {
     return (
-      <table>
+      <table className='terms-table'>
         <thead>
           <tr>
             <th className='text-center'>목적</th> 
@@ -94,7 +94,7 @@ const TermsOfUseForm = ({setShowSignupForm}) => {
       <div style={{ 
         alignItems: 'center', justifyContent: 'center', 
         display: 'flex', flexDirection: 'column'}}
-        className='lg:w-[50%] w-full p-2'>
+        className='terms-check lg:w-[50%] w-full p-2'>
           <div className='lg:w-[400px] w-full grid grid-rows-5 grid-flow-col lg:gap-4 gap-2 items-center'>
             <h1 className='font-bold text-center'>LiQuest 서비스 약관에 동의해 주세요</h1>
             <div className="flex flex-wrap ">

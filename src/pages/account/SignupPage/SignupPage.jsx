@@ -9,7 +9,7 @@ function SignupPage() {
 
   return (
     <div className='pt-[63px] min-h-screen h-fit'>
-      <section style={{ width: '100%', minHeight: 'calc(100vh - 63px)', height: 'fit-content', display: 'flex', flexDirection: 'column' }}>
+      <section style={{ width: '100%', minHeight: 'calc(100vh - 63px)', height: 'fit-content', display: 'flex', flexDirection: 'column', fontFamily: 'JalnanGothic' }}>
         <div style={{ flex: '1', display: 'flex' }}>
           <Description />
           {showSignupForm ? (

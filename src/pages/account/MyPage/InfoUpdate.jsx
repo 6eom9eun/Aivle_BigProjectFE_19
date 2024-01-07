@@ -91,7 +91,7 @@ function InfoUpdate() {
   return (
     <div>
       <Sidebar2 />
-      <div style={{padding:'63px', marginLeft:'256px'}}>
+      <div style={{padding:'63px', marginLeft:'256px', fontFamily: 'JalnanGothic'}}>
       <form>
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12"></div>
@@ -181,7 +181,7 @@ function InfoUpdate() {
         >
           수정
         </Button>
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} style={{fontFamily: 'JalnanGothic'}}>
         <ModalContent>
           {(onClose) => (
             <>

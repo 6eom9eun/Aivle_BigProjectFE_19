@@ -9,7 +9,6 @@ function ArticleList() {
     const nav = useNavigate();
     const [articleData, setArticleData] = useState([]);
     const token = sessionStorage.getItem('aivle19_token')
-    const [profiles, setProfiles] = useState(null);
 
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/board/', {
@@ -38,7 +37,7 @@ function ArticleList() {
     }, [page, articleData]);
 
   return (
-    <div style={{padding:'63px', position: 'relative'}}>
+    <div style={{padding:'63px', position: 'relative', fontFamily: 'JalnanGothic'}}>
         <Table 
             bottomContent={
                 <div className="flex w-full items-center">
@@ -71,7 +70,7 @@ function ArticleList() {
         }}
         >
             <TableHeader>
-                <TableColumn style={{display: 'flex', justifyContent: 'right', alignItems: 'center', paddingRight:'450px', paddingLeft:"189px"}} key="title">글 제목</TableColumn>
+                <TableColumn style={{display: 'flex', justifyContent: 'right', alignItems: 'center', paddingRight:'450px', paddingLeft:"245px"}} key="title">글 제목</TableColumn>
                 <TableColumn key="username">작성자</TableColumn>
                 <TableColumn style={{paddingLeft:'70px'}} key="created_at">작성 시간</TableColumn>
             </TableHeader>

@@ -20,6 +20,7 @@ const Main = () => {
     const [word, setWord] = useState('');
     const [quiz, setQuiz] = useState({});
     const [correctAnswer, setCorrectAnswer] = useState('');
+    const [studySentence, setStudySentence] = useState('');
     const [messages, setMessages] = useState([
         {
             text: `어서오세요.\n생성형 AI를 통한 문해력 향상 학습 서비스에 입장하셨습니다.`,
@@ -73,11 +74,11 @@ const Main = () => {
                 ...prevMessages, // 이전 메시지들
                 {
                     text: `이번에 학습하실 단어는 "${word}" 입니다.`,
-                    isUser: false, isTyping: false, id: Date.now(), step: step
+                    isUser: false, id: Date.now(), step: step
                 },
                 {
                     text: `입력창에 "${word}"를 입력하시면 단어 퀴즈가 시작됩니다.`,
-                    isUser: false, isTyping: false, id: Date.now(), step: step
+                    isUser: false, id: Date.now(), step: step
                 },
             ]);
             setAiIsTalking(false);
@@ -91,17 +92,24 @@ const Main = () => {
             }
         }).then(response => {
             if (response.status === 200) {
-                setQuizId(response.data.quiz_id);
+                const tmpQuizId = response.data.quiz_id;
                 const tmpQuiz = JSON.parse(response.data.quiz).questions[0];
+                const tmpWord = response.data.word;
+                const tmpStep = JSON.parse(response.data.chat_log)[JSON.parse(response.data.chat_log).length - 1].step;
+                const tmpMessages = JSON.parse(response.data.chat_log);
+                setQuizId(tmpQuizId);
                 setQuiz(tmpQuiz);
                 for (let i = 0; i < tmpQuiz.answers.length; i++) {
                     if (tmpQuiz.answers[i].correct === true) {
                         setCorrectAnswer(tmpQuiz.answers[i].answer);
                     }
                 }
-                setWord(response.data.word);
-                setMessages(JSON.parse(response.data.chat_log));
-                setStep(JSON.parse(response.data.chat_log)[JSON.parse(response.data.chat_log).length - 1].step);
+                setWord(tmpWord);
+                setStep(tmpStep);
+                setMessages([...tmpMessages, {
+                    text: `${Date()}\n[${tmpQuizId}회차 학습: ${tmpWord}] 재입장 하셨습니다.`,
+                    mode: 'reEnter', id: Date.now(), step: tmpStep
+                }]);
             }
         })
         .catch(error => {
@@ -120,6 +128,7 @@ const Main = () => {
                     <MessageList
                         token={token}
                         quizId={quizId}
+                        studySentence={studySentence}
                         messages={messages}
                         setMessages={setMessages}
                         scrollRef={scrollRef}
@@ -139,6 +148,8 @@ const Main = () => {
                         quiz={quiz}
                         correctAnswer={correctAnswer}
                         setCorrectAnswer={setCorrectAnswer}
+                        studySentence={studySentence}
+                        setStudySentence={setStudySentence}
                         messages={messages}
                         setMessages={setMessages}
                         messageFormRef={messageFormRef}

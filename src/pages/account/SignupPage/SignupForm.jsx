@@ -77,7 +77,7 @@ function SignupForm() {
     return (
         <div style={{ 
             alignItems: 'center', justifyContent: 'center', 
-            display:'flex', flexDirection:'column' }}
+            display:'flex', flexDirection:'column'}}
             className='lg:w-[50%] w-full p-2'>
             <div>
             <span className='font-semibold'>회원가입</span>

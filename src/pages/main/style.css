@@ -15,7 +15,6 @@
 }
 
 .message {
-    max-width: 80%;
     width: fit-content;
     border-radius: 20px;
     margin: 10px;
@@ -28,14 +27,24 @@
 }
 
 .user-message {
+    max-width: 80%;
     background-color: var(--color-primary-500);
     color: #ffffff;
     float: right;
 }
 
 .ai-message {
+    max-width: 80%;
     background-color: #ffffff;
     float: left;
+}
+
+.guide-re-enter {
+    background-color: var(--color-primary-300);
+    color: rgb(80, 80, 80);
+    font-size: x-small;
+    margin: auto 10px;
+    text-align: center;
 }
 
 .control {
@@ -90,6 +99,7 @@
         width: calc(100% - 400px);
         padding: 0 2em 0 2em;
     }
+    
     .message {
         max-width: 60%;
     }
@@ -97,5 +107,11 @@
     .message-form {
         margin: 10px;
         border-radius: 10px;
+    }
+}
+
+@media (min-width: 321px) {
+    .guide-re-enter {
+        margin: auto;
     }
 }

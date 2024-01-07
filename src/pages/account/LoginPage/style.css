@@ -1,0 +1,10 @@
+@font-face {
+    font-family: "robotoMedium";
+    font-style: normal;
+    font-weight: 100;
+    src: url("../../../assets/fonts/Roboto-Medium.ttf");
+  }
+
+.font-roboto {
+    font-family: "robotoMedium";
+}

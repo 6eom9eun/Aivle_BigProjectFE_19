@@ -50,7 +50,9 @@ function ProfileUpdate() {
         const url = "http://127.0.0.1:8000/accounts/profile/update/";
         const formData = new FormData();
         formData.append('introduction', AboutInitial ? userData?.profile.introduction : About);
-        formData.append('image', Image === null ? userData?.profile.image : Image);
+        if(Image !== null) {
+            formData.append('image', Image);
+        }
 
         axios
             .put(url, formData, {
@@ -74,7 +76,7 @@ function ProfileUpdate() {
   return (
     <div>
         <Sidebar2 />
-        <div style={{padding:'63px', marginLeft:'256px'}}>
+        <div style={{padding:'63px', marginLeft:'256px', fontFamily:'JalnanGothic'}}>
             <form encType='multipart/form-data'>
                 <div className="space-y-12">
                 <div className="border-b border-gray-900/10 pb-12"></div>
@@ -136,7 +138,7 @@ function ProfileUpdate() {
                         >
                         수정
                         </Button>
-                        <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                        <Modal isOpen={isOpen} onOpenChange={onOpenChange} style={{fontFamily: 'JalnanGothic'}}>
                             <ModalContent>
                                 {(onClose) => (
                             <>

@@ -54,7 +54,7 @@ function App() {
           <Route path="/board" element={<PrivateRoute isThatTrue={isLogin} isTrue={<ArticleList />} isFalse={<LoginPage />} />} />
           <Route path="/board/:postId" element={<PrivateRoute isThatTrue={isLogin} isTrue={<Article />} isFalse={<LoginPage />} />} />
           <Route path="/board/new" element={<PrivateRoute isThatTrue={isLogin} isTrue={<CreateArticle />} isFalse={<LoginPage />} />} />
-          <Route path="/board/update" element={<PrivateRoute isThatTrue={isLogin} isTrue={<UpdateArticle />} isFalse={<LoginPage />} />} />
+          <Route path="/board/:postId/update" element={<PrivateRoute isThatTrue={isLogin} isTrue={<UpdateArticle />} isFalse={<LoginPage />} />} />
         </Routes>
 
         <Footer />

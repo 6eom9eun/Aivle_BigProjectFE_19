@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useState, useRef, useEffect } from 'react';
 
-const MessageItem = ({ message, setMessages, quizId, step, setStep, setAiIsTalking, writingWords, setWritingWords }) => {
+const MessageItem = ({ message, setMessages, quizId, studySentence,
+    step, setStep, setAiIsTalking, writingWords, setWritingWords }) => {
     const token = sessionStorage.getItem('aivle19_token');
 
     const [imgFile, setImageFile] = useState("");
@@ -44,9 +45,15 @@ const MessageItem = ({ message, setMessages, quizId, step, setStep, setAiIsTalki
         ]);
         const response = checkWithOCR();
         if ((await response).status === 200 || (await response).status === 201) {
-            console.log((await response).data.text_results);
-            setStep(301);
-            // TODO: 확인 후, 채점 결과 좋으면 setStep(301), 채점 결과 별로면 setStep(202)
+            const textResults = (await response).data.text_results;
+            setMessages((prevMessages) => [
+                ...prevMessages,
+                { text: `인식 결과는 다음과 같습니다:\n\n${textResults.map((ele => ele)).join(' ')}`, isUser: false, id: Date.now(), step: step},
+            ]);
+            const gradingResult = (await response).data.answer;
+            // 채점 결과 좋으면 setStep(301), 채점 결과 별로면 setStep(202)
+            if (gradingResult) setStep(301);
+            else setStep(202);
         }
     }
 
@@ -63,9 +70,15 @@ const MessageItem = ({ message, setMessages, quizId, step, setStep, setAiIsTalki
         checkWithSTT();
         const response = checkWithSTT();
         if ((await response).status === 200) {
-            console.log((await response).data.text);
-            setStep(303);
-            // TODO: 확인 후, 채점 결과 좋으면 setStep(303), 채점 결과 별로면 setStep(302)
+            const textResult = (await response).data.text;
+            setMessages((prevMessages) => [
+                ...prevMessages,
+                { text: `인식 결과는 다음과 같습니다:\n\n${textResult}`, isUser: false, id: Date.now(), step: step},
+            ]);
+            const gradingResult = (await response).data.answer;
+            // 채점 결과 좋으면 setStep(303), 채점 결과 별로면 setStep(302)
+            if (gradingResult) setStep(303);
+            else setStep(302);
         }
     }
     
@@ -80,6 +93,7 @@ const MessageItem = ({ message, setMessages, quizId, step, setStep, setAiIsTalki
     const checkWithOCR = async () => {
         const formData = new FormData();
         formData.append('image', imgRef.current.files[0]);
+        formData.append('text', studySentence);
         return await axios.post(process.env.REACT_APP_API_URL + '/study/quiz/' + quizId + '/ocr/', formData, {
             headers: {
                 'Authorization': `Token ${token}`,
@@ -97,6 +111,7 @@ const MessageItem = ({ message, setMessages, quizId, step, setStep, setAiIsTalki
 
         const formData = new FormData();
         formData.append('audio', audio);
+        formData.append('text', studySentence);
         return await axios.post(process.env.REACT_APP_API_URL + '/study/quiz/' + quizId + '/stt/', formData, {
             headers: {
                 'Authorization': `Token ${token}`,

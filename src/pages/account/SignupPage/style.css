@@ -10,7 +10,13 @@
  font-family: 'Noto Sans KR', sans-serif;
 }
 
-input[type="checkbox"] {
+.terms-check label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.terms-check input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -24,19 +30,13 @@ input[type="checkbox"] {
   position: relative;
 }
 
-input[type="checkbox"]:checked {
+.terms-check input[type="checkbox"]:checked {
   background-color: var(--color-primary-500);
   border-color: var(--color-primary-500);
   color: #fff;
 }
 
-label {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-input[type="checkbox"]::after {
+.terms-check input[type="checkbox"]::after {
   content: "\2713";
   font-size: 20px;
   color: #fff;
@@ -47,7 +47,7 @@ input[type="checkbox"]::after {
   display: none;
 }
 
-input[type="checkbox"]:checked::after {
+.terms-check input[type="checkbox"]:checked::after {
   display: block;
 }
 
@@ -72,19 +72,19 @@ input[type="checkbox"]:checked::after {
   border-radius: 10px;
 }
 
-table {
+.terms-table table {
   width: 100%;
   border-collapse: collapse;
 }
 
 
-th {
+.terms-table th {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
 }
 
-td {
+.terms-table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;

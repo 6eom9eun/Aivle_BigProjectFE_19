@@ -35,7 +35,7 @@ function RankPage() {
   const hasMore = page < 9;
 
   return (
-    <div style={{padding:'63px'}}>
+    <div style={{padding:'63px', fontFamily: 'JalnanGothic'}}>
         <Table
           bottomContent={
             hasMore && !isLoading ? (
@@ -55,7 +55,7 @@ function RankPage() {
         <TableHeader>
           <TableColumn style={{paddingLeft:'95px'}} key="rank">순위</TableColumn>
           <TableColumn style={{paddingLeft:'102px'}} key="username">아이디</TableColumn>
-          <TableColumn style={{paddingLeft:'92px'}} key="user_level">레벨</TableColumn>
+          <TableColumn style={{paddingLeft:'112px'}} key="user_level">레벨</TableColumn>
           <TableColumn style={{paddingLeft:'145px'}} key="created_dt">클리어 시간</TableColumn>
         </TableHeader>
         <TableBody
@@ -78,7 +78,7 @@ function RankPage() {
                       </div>
                     </PopoverContent>
                   </Popover>
-                ) : columnKey === 'rank' ? (item.rank <= 3 ? '👑' : getKeyValue(item, columnKey)) : columnKey === 'created_dt' ? new Date(getKeyValue(item, columnKey)).toLocaleString() : getKeyValue(item, columnKey)}
+                ) : columnKey === 'rank' ? (item.rank <= 3 ? '👑' : getKeyValue(item, columnKey)) : columnKey === 'user_level' ? `${getKeyValue(item, columnKey)} Level` : columnKey === 'created_dt' ? new Date(getKeyValue(item, columnKey)).toLocaleString() : getKeyValue(item, columnKey)}
               </TableCell>}
           </TableRow>
         )}

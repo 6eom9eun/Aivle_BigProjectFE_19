@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import { ReactComponent as KakaoLoginSymbol } from '../../../assets/socialSymbol/KakaoSymbol.svg';
+import GoogleSymbol from '../../../assets/socialSymbol/GoogleSymbol.png';
 
 function LoginForm({setIsLogin}) {
 
@@ -45,7 +46,7 @@ function LoginForm({setIsLogin}) {
     return (
         <div style={{ 
             alignItems: 'center', justifyContent: 'center', 
-            display:'flex', flexDirection:'column' }}
+            display:'flex', flexDirection:'column', fontFamily:'JalnanGothic'}}
             className='lg:w-[50%] w-full p-2'>
             
             <h3 className="font-semibold">환영합니다!</h3>
@@ -66,16 +67,26 @@ function LoginForm({setIsLogin}) {
                   <input value={Password} onChange={onPasswordHandler} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="password" placeholder="******************" />
                 </div>
                 <br />
-              <button onClick={onSubmitHandler} className='py-2 rounded-md text-white font-semibold bg-[var(--color-primary-500)] border border-[var(--color-primary-500)] hover:text-[var(--color-primary-500)] hover:bg-white' >
+                <button onClick={onSubmitHandler} className='p-2 rounded-xl text-white font-semibold bg-[var(--color-primary-500)] border border-[var(--color-primary-500)] hover:text-[var(--color-primary-500)] hover:bg-white' >
                     로그인
                 </button>
                 {/* {error && <div style={{ color: 'red' }}>{error}</div>} */}
-  
+
+                <div className='m-auto mt-2 flex align-middle font-normal'>
+                    <span style={{color:'grey'}}>아직 계정이 없으신가요?</span>
+                    <a href='/signup' className='ml-2 text-blue-600 visited:text-purple-600 ...'>회원가입</a>
+                </div>
+                <div className='w-full mt-8'>
+                    <button className='w-full mt-2 grid grid-cols-[10%_90%] place-items-center p-2 text-black/[0.85] bg-[#FEE500] rounded-xl'>
+                        <KakaoLoginSymbol width={25} fill='#000000' />
+                        <div className='font-normal'>카카오 계정으로 로그인</div>
+                    </button>
+                    <button className='w-full font-roboto mt-2 grid grid-cols-[10%_90%] place-items-center p-2 text-black/[0.54] border-2 bg-[#F2F2F2] rounded-xl'>
+                        <img width={25} src={GoogleSymbol} />
+                        <div className='font-normal'>구글 계정으로 로그인</div>
+                    </button>
+                </div>
             </form>
-            <div className='mt-2 flex align-middle'>
-                <span style={{color:'grey'}}>아직 계정이 없으신가요?</span>
-                <a href='/signup' className='ml-2 text-blue-600 visited:text-purple-600 ...'>회원가입</a>
-            </div>
         </div>
     )
 }
