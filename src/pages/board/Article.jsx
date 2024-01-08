@@ -23,7 +23,7 @@ function Article() {
   const [editing, setEditing] = useState({});
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:8000/board/${postId}/`, {
+        axios.get(process.env.REACT_APP_API_URL + `/board/${postId}/`, {
           headers: {
               'Authorization': `Token ${token}`
           }
@@ -35,7 +35,7 @@ function Article() {
                 console.error("게시글 불러오기 실패", error);
             });
 
-        axios.get(`http://127.0.0.1:8000/board/${postId}/comments/`, {
+        axios.get(process.env.REACT_APP_API_URL + `/board/${postId}/comments/`, {
           headers: {
               'Authorization': `Token ${token}`
           }
@@ -50,7 +50,7 @@ function Article() {
 
     const fetchComments = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/board/${postId}/comments/`, {
+        const response = await axios.get(process.env.REACT_APP_API_URL + `/board/${postId}/comments/`, {
           headers: {
               'Authorization': `Token ${token}`
           }
@@ -68,7 +68,7 @@ function Article() {
       };
 
       try {
-        const response = await axios.post(`http://127.0.0.1:8000/board/${postId}/comments/`, req, {
+        const response = await axios.post(process.env.REACT_APP_API_URL + `/board/${postId}/comments/`, req, {
           headers: {
               'Authorization': `Token ${token}`,
               'Content-Type': 'application/json'
@@ -83,7 +83,7 @@ function Article() {
     }
 
     const onDeleteCommentHandler = async (postId, commentId) => {
-      const url = `http://127.0.0.1:8000/board/${postId}/comments/${commentId}/`;
+      const url = process.env.REACT_APP_API_URL + `/board/${postId}/comments/${commentId}/`;
       try {
           const response = await axios.delete(url, {
             headers: {
@@ -115,7 +115,7 @@ function Article() {
   };
 
   const onUpdateSubmitHandler = async (postId, commentId) => {
-    const url = `http://127.0.0.1:8000/board/${postId}/comments/${commentId}/`;
+    const url = process.env.REACT_APP_API_URL + `/board/${postId}/comments/${commentId}/`;
     let req = {
       comment: newComment,
     };
@@ -135,7 +135,7 @@ function Article() {
 
   const onDeleteArticleHandler = async (e) => {
     e.preventDefault()
-    const url = `http://127.0.0.1:8000/board/${postId}/`;
+    const url = process.env.REACT_APP_API_URL + `/board/${postId}/`;
     try {
         const response = await axios.delete(url, {
           headers: {
@@ -151,8 +151,9 @@ function Article() {
 
 
   return (
-    <div data-color-mode="light" style={{padding:'63px', paddingLeft:'270px', paddingRight:'270px', fontFamily: 'JalnanGothic'}}>
-      <div style={{paddingBottom:'63px'}}>
+    <div data-color-mode="light" style={{fontFamily: 'JalnanGothic'}}
+      className="lg:px-40 lg:py-10 p-4 m-auto">
+      <div>
         <div>
           <h1 style={{fontSize: "3em", fontWeight: 'bold'}}>{articleData.title}</h1>
         </div>
@@ -207,7 +208,7 @@ function Article() {
         </div>
       </div>
 
-      <div style={{paddingBottom: '55px'}}>
+      <div style={{padding: '55px 0'}}>
         <MDEditor.Markdown 
           source={articleData.content} 
           style={{whiteSpace: 'pre-wrap'}}
@@ -238,7 +239,7 @@ function Article() {
                   name={comment.username}
                   description={new Date(comment.created_at).toLocaleString()}
                   avatarProps= {{
-                    src: `http://127.0.0.1:8000${comment.profile_image}`
+                    src: process.env.REACT_APP_API_URL + comment.profile_image
                   }}
                   style={{ cursor: "pointer" }}
                 />

@@ -96,7 +96,7 @@
 
 @media (min-width: 1024px) {
     .messages-list {
-        width: calc(100% - 400px);
+        width: calc(100% - 320px);
         padding: 0 2em 0 2em;
     }
     

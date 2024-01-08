@@ -5,7 +5,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // import NotFound from './NotFound';
 
 import { Header, Footer, PrivateRoute } from './components';
-import Temp from './Temp';
 import Main from './pages/main/Main';
 import Info from './pages/info/Info';
 import LoginPage from './pages/account/LoginPage/LoginPage';
@@ -15,10 +14,7 @@ import MyInfo from './pages/account/MyPage/MyInfo';
 import Profile from './pages/account/MyPage/Profile';
 import InfoUpdate from './pages/account/MyPage/InfoUpdate';
 import ProfileUpdate from './pages/account/MyPage/ProfileUpdate';
-import ArticleList from './pages/board/ArticleList';
-import Article from './pages/board/Article';
-import CreateArticle from './pages/board/CreateArticle';
-import UpdateArticle from './pages/board/UpdateArticle';
+import Board from './pages/board';
 import KakaoRedirection from './pages/account/LoginPage/KakaoRedirection';
 
 
@@ -52,10 +48,7 @@ function App() {
           <Route path="/profile" element={<PrivateRoute isThatTrue={isLogin} isTrue={<Profile />} isFalse={<LoginPage />} />} />
           <Route path="/infoUpdate" element={<PrivateRoute isThatTrue={isLogin} isTrue={<InfoUpdate />} isFalse={<LoginPage />} />} />
           <Route path="/profileUpdate" element={<PrivateRoute isThatTrue={isLogin} isTrue={<ProfileUpdate />} isFalse={<LoginPage />} />} />
-          <Route path="/board" element={<PrivateRoute isThatTrue={isLogin} isTrue={<ArticleList />} isFalse={<LoginPage />} />} />
-          <Route path="/board/:postId" element={<PrivateRoute isThatTrue={isLogin} isTrue={<Article />} isFalse={<LoginPage />} />} />
-          <Route path="/board/new" element={<PrivateRoute isThatTrue={isLogin} isTrue={<CreateArticle />} isFalse={<LoginPage />} />} />
-          <Route path="/board/:postId/update" element={<PrivateRoute isThatTrue={isLogin} isTrue={<UpdateArticle />} isFalse={<LoginPage />} />} />
+          <Route path="/board/*" element={<PrivateRoute isThatTrue={isLogin} isTrue={<Board />} isFalse={<LoginPage />} />} />
           <Route path="/accounts/kakao/callback/" element={<KakaoRedirection setIsLogin={setIsLogin} />} />
         </Routes>
 

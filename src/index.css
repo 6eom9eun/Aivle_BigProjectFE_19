@@ -55,12 +55,11 @@
   padding-top: 63px; /* 상단 header의 height */
   width: calc(100%);
   min-height: 100vh;
-  background-color: var(--color-primary-200);
 }
 
 @media (min-width: 1024px) {
   .page {
-    width: calc(100% - 400px);
+    width: calc(100% - 320px);
   }
 }
 

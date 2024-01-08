@@ -119,10 +119,10 @@ const Main = () => {
 
     return (
         <div className='flex'>
-            <div className='w-0 lg:w-[400px] pt-[63px]'>
+            <div className='w-0 lg:w-[320px] pt-[63px]'>
                 <GoToLatestAndQuizList />
             </div>
-            <div className='page'>
+            <div className='page bg-[var(--color-primary-200)]'>
                 <div>
                     {/* 대화 형식으로 나타난 학습 로그 */}
                     <MessageList

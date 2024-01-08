@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import GoToLatestAndQuizList from "./GoToLatestAndQuizList";
 
 import { IoMdLogOut } from "react-icons/io";
+import { GoCommentDiscussion } from "react-icons/go";
 import { FaRankingStar } from "react-icons/fa6";
 import { CiUser } from "react-icons/ci";
 
@@ -37,6 +38,14 @@ const Sidebar = (props) => {
                                     <a href="/rank" className="flex justify-end hover:text-[var(--color-primary-500)]">
                                         <FaRankingStar size={25} />
                                         <span>&nbsp;&nbsp;전체랭킹 {props.userrank}위</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <a href="/board" className="flex justify-end hover:text-[var(--color-primary-500)]">
+                                        <GoCommentDiscussion size={25} />
+                                        <span>&nbsp;&nbsp;커뮤니티</span>
                                     </a>
                                 </td>
                             </tr>

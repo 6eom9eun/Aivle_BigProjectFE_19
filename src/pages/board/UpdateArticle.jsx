@@ -28,7 +28,7 @@ function UpdateArticle() {
     formData.append('image', files[0]);
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/board/image-upload/', formData, {
+      const response = await axios.post(process.env.REACT_APP_API_URL + '/board/image-upload/', formData, {
         headers: {
           'Authorization': `Token ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -36,7 +36,7 @@ function UpdateArticle() {
       });
       const imageUrl = response.data.image_url;
 
-      const newContent = `${content}![Alt text](http://127.0.0.1:8000${imageUrl})`;
+      const newContent = `${content}![Alt text](${process.env.REACT_APP_API_URL + imageUrl})`;
       setContent(newContent);
     } catch (error) {
       console.error('Image upload error:', error);
@@ -51,7 +51,7 @@ function UpdateArticle() {
     };
 
     try {
-      const response = await axios.put(`http://127.0.0.1:8000/board/${postId}/`, req, {
+      const response = await axios.put(process.env.REACT_APP_API_URL + `/board/${postId}/`, req, {
         headers: {
           'Authorization': `Token ${token}`,
           'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ function UpdateArticle() {
   };
 
   return (
-    <div data-color-mode="light" style={{ padding: '83px', fontFamily:'JalnanGothic' }}>
+    <div data-color-mode="light" style={{ padding: '20px', fontFamily:'JalnanGothic' }}>
       <div className="w-1/2 flex flex-col gap-4" style={{ paddingBottom: '50px' }}>
         <div className="flex w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
           <Input
@@ -103,10 +103,7 @@ function UpdateArticle() {
         />
       </div>
 
-      <div
-        style={{ paddingTop: '17px', paddingLeft: '455px' }}
-        className="flex flex-wrap gap-4 items-right"
-      >
+      <div className="flex flex-wrap gap-4 pt-5 justify-center">
         <>
           <Button onPress={onOpenCancel} type="button" color="secondary" variant="light">
             취소

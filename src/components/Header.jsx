@@ -68,8 +68,8 @@ function Header(props) {
                     {
                         props.isLogin ?
                         <div className="flex items-center gap-[2em]">
-                            <a href="/rank" className="flex hover:text-[var(--color-primary-600)]" ><FaRankingStar style={{width: '20px', height: 'auto',}} /><span>&nbsp;&nbsp;전체랭킹 {userrank}위</span></a>
                             <a href="/board" className="hover:text-[var(--color-primary-600)]" >커뮤니티</a>
+                            <a href="/rank" className="flex hover:text-[var(--color-primary-600)]" >전체랭킹 {userrank}위</a>
                             <a href="/myinfo" className="hover:text-[var(--color-primary-600)]" >{username} 님</a>
                             {/* <a href="" className="hover:text-[var(--color-primary-600)]" >찬스 --개</a> */}
                             {/* <a href="" className="hover:text-[var(--color-primary-600)]" >포인트 --점</a>  */}

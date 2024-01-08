@@ -11,7 +11,7 @@ function ArticleList() {
     const token = sessionStorage.getItem('aivle19_token')
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/board/', {
+        axios.get(process.env.REACT_APP_API_URL + '/board/', {
             headers: {
                 'Authorization': `Token ${token}`
             }
@@ -37,7 +37,7 @@ function ArticleList() {
     }, [page, articleData]);
 
   return (
-    <div className='pt-[63px] min-h-screen' style={{padding:'63px', position: 'relative', fontFamily: 'JalnanGothic'}}>
+    <div className='p-4' style={{position: 'relative', fontFamily: 'JalnanGothic'}}>
         <Table 
             bottomContent={
                 <div className="flex w-full items-center">
@@ -70,9 +70,9 @@ function ArticleList() {
         }}
         >
             <TableHeader>
-                <TableColumn style={{display: 'flex', justifyContent: 'right', alignItems: 'center', paddingRight:'450px', paddingLeft:"245px"}} key="title">글 제목</TableColumn>
-                <TableColumn key="username">작성자</TableColumn>
-                <TableColumn style={{paddingLeft:'70px'}} key="created_at">작성 시간</TableColumn>
+                <TableColumn style={{textAlign: 'center', alignItems: 'center', width: '60%'}} key="title">글 제목</TableColumn>
+                <TableColumn style={{textAlign: 'center', alignItems: 'center', width: '10%'}} key="username">작성자</TableColumn>
+                <TableColumn style={{textAlign: 'center', alignItems: 'center', width: '30%'}} key="created_at">작성 시간</TableColumn>
             </TableHeader>
             <TableBody items={items}>
                 {(item) => (
