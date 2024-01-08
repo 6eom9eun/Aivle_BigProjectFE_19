@@ -106,10 +106,13 @@ const Main = () => {
                 }
                 setWord(tmpWord);
                 setStep(tmpStep);
-                setMessages([...tmpMessages, {
-                    text: `${Date()}\n[${tmpQuizId}회차 학습: ${tmpWord}] 재입장 하셨습니다.`,
-                    mode: 'reEnter', id: Date.now(), step: tmpStep
-                }]);
+                if (tmpStep !== -1) {
+                    setMessages([...tmpMessages, {
+                        text: `${Date()}\n[${tmpQuizId}회차 학습: ${tmpWord}] 재입장 하셨습니다.`,
+                        mode: 'reEnter', id: Date.now(), step: tmpStep
+                    }]);
+                }
+                else setMessages(tmpMessages);
             }
         })
         .catch(error => {

@@ -39,7 +39,6 @@ const MessageForm = ({ quizId, word, quiz,
                 endOfReading();
                 break;
             case 401: // 400: 작문
-                setUpdateSolvedDateDidMount(true);
                 isItTurnToWriting();
                 break;
             case 402:
@@ -48,7 +47,8 @@ const MessageForm = ({ quizId, word, quiz,
             case 403:
                 studyWriting2();
                 break;
-            case -1 :
+            case 501: // 500: 학습 끝
+                setUpdateSolvedDateDidMount(true);
                 endOfLearning();
                 break;
             default:
@@ -315,7 +315,7 @@ const MessageForm = ({ quizId, word, quiz,
         });
 
         if (writingCheck === null) {
-            setStep(-1);
+            setStep(501);
         }
         else {
             // 사용자한테 작문 할거냐고 물어보기
@@ -407,12 +407,12 @@ const MessageForm = ({ quizId, word, quiz,
             addAiMessage(`완벽합니다! 모든 학습의 수행을 완료하셨습니다.`, step - 1);
             await delay();
             setAiIsTalking(false);
-            setStep(-1);
+            setStep(501);
         }
     }
     
     const endOfLearning = () => {
-        addAiMessage(`${Date()}, 학습을 종료합니다.`);
+        addAiMessage(`${Date()}, 학습을 종료합니다.`, step=-1);
     }
     
     return (

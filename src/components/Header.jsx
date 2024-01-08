@@ -59,9 +59,9 @@ function Header(props) {
                         <Sidebar width={SIDEBAR_WIDTH} isLogin={props.isLogin} isOpen={isOpen} setOpen={setOpen} setX={setX} xPosition={xPosition}
                             onClickLogout={onClickLogout} username={username} userrank={userrank} />
                     </div>
-                    <a href={process.env.PUBLIC_URL + "/"} className="flex items-center gap-2 mr-5">
+                    <a href={process.env.PUBLIC_URL + "/"} className="flex items-center gap-2">
                         <img className="w-10 h-10" src={process.env.PUBLIC_URL + '/logo192.png'} />
-                        <h1 className="text-xl">문해력</h1>
+                        <h1 className="text-xl">LiQuest</h1>
                     </a>
                 </div>
                 <div className="lg:flex hidden">

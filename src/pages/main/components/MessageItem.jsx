@@ -248,7 +248,7 @@ const MessageItem = ({ message, setMessages, quizId, studySentence,
                     step === 401 && 
                     <div>
                         <button className='text-sm mt-2 w-[100%] p-2 bg-[var(--color-primary-500)] hover:bg-[var(--color-primary-600)] transition-colors text-white rounded-full' onClick={() => {setStep(402);}}>네, 작문하기를 시작합니다.</button>
-                        <button className='text-sm mt-2 w-[100%] p-2 bg-[var(--color-primary-500)] hover:bg-[var(--color-primary-600)] transition-colors text-white rounded-full' onClick={() => {setStep(-1);}}>아니오, 오늘은 이만 마치겠습니다.</button>
+                        <button className='text-sm mt-2 w-[100%] p-2 bg-[var(--color-primary-500)] hover:bg-[var(--color-primary-600)] transition-colors text-white rounded-full' onClick={() => {setStep(501);}}>아니오, 오늘은 이만 마치겠습니다.</button>
                     </div>
                 }
             </div>
