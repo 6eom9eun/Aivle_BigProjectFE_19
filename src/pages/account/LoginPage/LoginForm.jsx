@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import GoogleSymbol from '../../../assets/socialSymbol/GoogleSymbol.png';
 import SocialKakao from './SocialKakao';
+import SocialNaver from './SocialNaver';
 
 function LoginForm({setIsLogin}) {
 
@@ -82,10 +83,7 @@ function LoginForm({setIsLogin}) {
                         <div className='font-normal'>카카오 계정으로 로그인</div>
                     </button> */}
                     <SocialKakao />
-                    <button className='w-full font-roboto mt-2 grid grid-cols-[10%_90%] place-items-center p-2 text-black/[0.54] border-2 bg-[#F2F2F2] rounded-xl'>
-                        <img width={25} src={GoogleSymbol} />
-                        <div className='font-normal'>구글 계정으로 로그인</div>
-                    </button>
+                    <SocialNaver />
                 </div>
             </form>
         </div>
