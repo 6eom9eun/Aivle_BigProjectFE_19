@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as KakaoLoginSymbol } from '../../../assets/socialSymbol/KakaoSymbol.svg';
 import GoogleSymbol from '../../../assets/socialSymbol/GoogleSymbol.png';
+import SocialKakao from './SocialKakao';
 
 function LoginForm({setIsLogin}) {
 
@@ -77,10 +77,11 @@ function LoginForm({setIsLogin}) {
                     <a href='/signup' className='ml-2 text-blue-600 visited:text-purple-600 ...'>회원가입</a>
                 </div>
                 <div className='w-full mt-8'>
-                    <button className='w-full mt-2 grid grid-cols-[10%_90%] place-items-center p-2 text-black/[0.85] bg-[#FEE500] rounded-xl'>
+                    {/* <button className='w-full mt-2 grid grid-cols-[10%_90%] place-items-center p-2 text-black/[0.85] bg-[#FEE500] rounded-xl'>
                         <KakaoLoginSymbol width={25} fill='#000000' />
                         <div className='font-normal'>카카오 계정으로 로그인</div>
-                    </button>
+                    </button> */}
+                    <SocialKakao />
                     <button className='w-full font-roboto mt-2 grid grid-cols-[10%_90%] place-items-center p-2 text-black/[0.54] border-2 bg-[#F2F2F2] rounded-xl'>
                         <img width={25} src={GoogleSymbol} />
                         <div className='font-normal'>구글 계정으로 로그인</div>

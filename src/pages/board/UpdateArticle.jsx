@@ -69,7 +69,7 @@ function UpdateArticle() {
   };
 
   return (
-    <div data-color-mode="light" style={{ padding: '83px' }}>
+    <div data-color-mode="light" style={{ padding: '83px', fontFamily:'JalnanGothic' }}>
       <div className="w-1/2 flex flex-col gap-4" style={{ paddingBottom: '50px' }}>
         <div className="flex w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
           <Input
@@ -111,7 +111,7 @@ function UpdateArticle() {
           <Button onPress={onOpenCancel} type="button" color="secondary" variant="light">
             취소
           </Button>
-          <Modal isOpen={isCancelOpen} onOpenChange={onOpenChangeCancel} backdrop="Transparent">
+          <Modal style={{fontFamily:'JalnanGothic'}} isOpen={isCancelOpen} onOpenChange={onOpenChangeCancel} backdrop="Transparent">
             <ModalContent>
               {(onClose) => (
                 <>
@@ -141,7 +141,7 @@ function UpdateArticle() {
           <Button onPress={onOpenSave} type="button" color="secondary">
             저장
           </Button>
-          <Modal isOpen={isSaveOpen} onOpenChange={onOpenChangeSave} backdrop="Transparent">
+          <Modal style={{fontFamily:'JalnanGothic'}} isOpen={isSaveOpen} onOpenChange={onOpenChangeSave} backdrop="Transparent">
             <ModalContent>
               {(onClose) => (
                 <>

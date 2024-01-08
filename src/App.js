@@ -19,6 +19,7 @@ import ArticleList from './pages/board/ArticleList';
 import Article from './pages/board/Article';
 import CreateArticle from './pages/board/CreateArticle';
 import UpdateArticle from './pages/board/UpdateArticle';
+import KakaoRedirection from './pages/account/LoginPage/KakaoRedirection';
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
           <Route path="/board/:postId" element={<PrivateRoute isThatTrue={isLogin} isTrue={<Article />} isFalse={<LoginPage />} />} />
           <Route path="/board/new" element={<PrivateRoute isThatTrue={isLogin} isTrue={<CreateArticle />} isFalse={<LoginPage />} />} />
           <Route path="/board/:postId/update" element={<PrivateRoute isThatTrue={isLogin} isTrue={<UpdateArticle />} isFalse={<LoginPage />} />} />
+          <Route path="/accounts/kakao/callback/" element={<KakaoRedirection setIsLogin={setIsLogin} />} />
         </Routes>
 
         <Footer />

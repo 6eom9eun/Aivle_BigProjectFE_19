@@ -37,7 +37,7 @@ function ArticleList() {
     }, [page, articleData]);
 
   return (
-    <div style={{padding:'63px', position: 'relative', fontFamily: 'JalnanGothic'}}>
+    <div className='pt-[63px] min-h-screen' style={{padding:'63px', position: 'relative', fontFamily: 'JalnanGothic'}}>
         <Table 
             bottomContent={
                 <div className="flex w-full items-center">

@@ -25,7 +25,7 @@ function Profile() {
   return (
     <div>
         <Sidebar2 />
-        <div style={{fontFamily:'JalnanGothic', padding:'63px', marginLeft:'256px', marginBottom:'200px', display: 'flex', justifyContent: 'center', position: 'relative', top: '145px'}}>
+        <div className='pt-[63px] min-h-screen' style={{fontFamily:'JalnanGothic', padding:'63px', marginLeft:'256px', marginBottom:'200px', display: 'flex', justifyContent: 'center', position: 'relative', top: '145px'}}>
             <Card className="py-4" style={{ width: '300px', height: '460px'}}>
                 <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                 <p className="text-tiny uppercase font-bold">Level. {userData !== null ? userData.profile.user_level : 'Loading...'}</p>

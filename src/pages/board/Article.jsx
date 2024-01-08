@@ -175,7 +175,7 @@ function Article() {
           <span onClick={() => nav(`/board/${postId}/update`, { state: { title: articleData.title, content: articleData.content }})} className="user" style={{color: '#6B7270', paddingRight: '10px', fontSize: '0.9em'}}>수정</span>
           <>
           <span onClick={onOpen} className="user" style={{color: '#6B7270', fontSize: '0.9em'}}>삭제</span>
-          <Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop="Transparent">
+          <Modal style={{fontFamily:'JalnanGothic'}} isOpen={isOpen} onOpenChange={onOpenChange} backdrop="Transparent">
             <ModalContent>
               {(onClose) => (
                 <>
@@ -278,7 +278,7 @@ function Article() {
                 <span className="user" style={{color: '#6B7270'}} onClick={() => {setNewComment(comment.comment); setEditing({...editing, [comment.comment_id]: true})}}>수정</span>
               )}
               <span onClick={() => openModal(comment.comment_id)} className="user" style={{color: '#6B7270', paddingRight:'10px', paddingLeft:'10px'}}>삭제</span>  
-              <Modal isOpen={isModalOpen(comment.comment_id)} onOpenChange={() => closeModal(comment.comment_id)} backdrop="Transparent">
+              <Modal style={{fontFamily:'JalnanGothic'}} isOpen={isModalOpen(comment.comment_id)} onOpenChange={() => closeModal(comment.comment_id)} backdrop="Transparent">
                   <ModalContent>
                       {(onClose) => (
                       <>

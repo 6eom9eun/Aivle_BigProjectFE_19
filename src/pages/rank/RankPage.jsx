@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Spinner, Button, Popover, PopoverTrigger, PopoverContent} from "@nextui-org/react";
 import {useAsyncList} from "@react-stately/data";
 import UserProfile2 from "../board/UserProfile2";
@@ -35,7 +34,7 @@ function RankPage() {
   const hasMore = page < 9;
 
   return (
-    <div style={{padding:'63px', fontFamily: 'JalnanGothic'}}>
+    <div className='pt-[63px] min-h-screen' style={{padding: '63px', fontFamily: 'JalnanGothic'}}>
         <Table
           bottomContent={
             hasMore && !isLoading ? (

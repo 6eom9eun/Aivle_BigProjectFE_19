@@ -76,7 +76,7 @@ function ProfileUpdate() {
   return (
     <div>
         <Sidebar2 />
-        <div style={{padding:'63px', marginLeft:'256px', fontFamily:'JalnanGothic'}}>
+        <div className='pt-[63px] min-h-screen' style={{padding:'63px', marginLeft:'256px', fontFamily:'JalnanGothic'}}>
             <form encType='multipart/form-data'>
                 <div className="space-y-12">
                 <div className="border-b border-gray-900/10 pb-12"></div>

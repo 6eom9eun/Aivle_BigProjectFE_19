@@ -25,7 +25,7 @@ function MyInfo() {
   return (
     <div>
         <Sidebar2 />
-        <div style={{fontFamily:'JalnanGothic', padding:'63px', marginLeft:'256px', marginBottom:'200px', display: 'flex', justifyContent: 'center', position: 'relative', top: '145px'}}>
+        <div className='pt-[63px] min-h-screen' style={{fontFamily:'JalnanGothic', padding:'63px', marginLeft:'256px', marginBottom:'200px', display: 'flex', justifyContent: 'center', position: 'relative', top: '145px'}}>
             <Card className="py-4" style={{ width: '520px', height: '430px'}}>
                 <CardBody className="overflow-visible py-2">
                     <Input

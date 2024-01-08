@@ -45,7 +45,7 @@ function Header(props) {
     }
 
     return (
-        <div className={`w-full flex justify-center bg-white z-50 top-0 fixed`}>
+        <div style={{fontFamily:'JalnanGothic'}} className={`w-full flex justify-center bg-white z-50 top-0 fixed`}>
             {logoutPopup.open && <ConfirmPopup onOpenAlert={onClickLogout} onConfirm={handleConfirm} title={logoutPopup.title} message={logoutPopup.message} />}
 
             <div className="w-[100%] flex justify-between items-center px-4 py-2">
