@@ -75,7 +75,7 @@ function LoginForm({setIsLogin}) {
 
                 <div className='m-auto mt-2 flex align-middle font-normal'>
                     <span style={{color:'grey'}}>아직 계정이 없으신가요?</span>
-                    <a href='/signup' className='ml-2 text-blue-600 visited:text-purple-600 ...'>회원가입</a>
+                    <a href={process.env.PUBLIC_URL+"/signup"} className='ml-2 text-blue-600 visited:text-purple-600 ...'>회원가입</a>
                 </div>
                 <div className='w-full mt-8'>
                     <SocialKakao />

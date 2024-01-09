@@ -9,7 +9,7 @@ function Profile() {
     const token = sessionStorage.getItem('aivle19_token')
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/accounts/profile/', {
+        axios.get(process.env.REACT_APP_API_URL + '/accounts/profile/', {
             headers: {
                 'Authorization': `Token ${token}`
             }

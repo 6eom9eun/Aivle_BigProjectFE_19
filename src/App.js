@@ -34,7 +34,7 @@ function App() {
   return (
     <div className="App">
       <NextUIProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Header isLogin={isLogin} setIsLogin={setIsLogin} />
 
         <Routes>

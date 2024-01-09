@@ -10,7 +10,7 @@ function InfoUpdate() {
   const token = sessionStorage.getItem('aivle19_token')
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/accounts/user/', {
+        axios.get(process.env.REACT_APP_API_URL + '/accounts/user/', {
             headers: {
                 'Authorization': `Token ${token}`
             }
@@ -61,7 +61,7 @@ function InfoUpdate() {
   const onSubmitHandler = (e) => {
       e.preventDefault()
 
-      const url = "http://127.0.0.1:8000/accounts/user/update/";
+      const url = process.env.REACT_APP_API_URL + "/accounts/user/update/";
       const req = {
           'last_name': LastnameInitial ? userData?.user.last_name : Lastname,
           'first_name': FirstnameInitial ? userData?.user.first_name : Firstname,

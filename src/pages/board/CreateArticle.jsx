@@ -103,7 +103,7 @@ function CreateArticle() {
         />
       </div>
 
-      <div className="flex flex-wrap gap-4 pt-5 justify-center">
+      <div className="flex flex-wrap gap-4 pt-5 justify-end">
         <>
           <Button onPress={onOpenCancel} type="button" color="secondary" variant="light">
             취소

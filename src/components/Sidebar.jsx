@@ -27,7 +27,7 @@ const Sidebar = (props) => {
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <a href="/myinfo" className="flex justify-end hover:text-[var(--color-primary-500)]">
+                                    <a href={process.env.PUBLIC_URL+"/myinfo"} className="flex justify-end hover:text-[var(--color-primary-500)]">
                                         <CiUser size={25} />
                                         <span>&nbsp;&nbsp;{props.username} 님</span>
                                     </a>
@@ -35,7 +35,7 @@ const Sidebar = (props) => {
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <a href="/rank" className="flex justify-end hover:text-[var(--color-primary-500)]">
+                                    <a href={process.env.PUBLIC_URL+"/rank"} className="flex justify-end hover:text-[var(--color-primary-500)]">
                                         <FaRankingStar size={25} />
                                         <span>&nbsp;&nbsp;전체랭킹 {props.userrank}위</span>
                                     </a>
@@ -43,7 +43,7 @@ const Sidebar = (props) => {
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <a href="/board" className="flex justify-end hover:text-[var(--color-primary-500)]">
+                                    <a href={process.env.PUBLIC_URL+"/board"} className="flex justify-end hover:text-[var(--color-primary-500)]">
                                         <GoCommentDiscussion size={25} />
                                         <span>&nbsp;&nbsp;커뮤니티</span>
                                     </a>
