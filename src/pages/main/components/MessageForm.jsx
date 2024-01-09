@@ -11,7 +11,6 @@ const MessageForm = ({ quizId, word, quiz,
     const token = sessionStorage.getItem('aivle19_token');
     const username = sessionStorage.getItem('aivle19_username');
 
-    const [updateSolvedDateDidMount, setUpdateSolvedDateDidMount] = useState(false);
     const [message, setMessage] = useState('');
     const [audioUrl, setAudioUrl] = useState();
 
@@ -48,33 +47,11 @@ const MessageForm = ({ quizId, word, quiz,
                 studyWriting2();
                 break;
             case 501: // 500: 학습 끝
-                setUpdateSolvedDateDidMount(true);
                 endOfLearning();
                 break;
             default:
         }
     }, [step]);
-
-    useEffect(() => {
-        if (updateSolvedDateDidMount) {
-            const jsonString = JSON.stringify(messages);
-            const today = dateToTimestamp(Date());
-            const formData = new FormData();
-            formData.append('chat_log', jsonString);
-            formData.append('solved_date', today);
-            axios.patch(process.env.REACT_APP_API_URL + '/study/quiz/' + quizId + '/', formData, {
-                headers: {
-                    'Authorization': `Token ${token}`,
-                    'Content-Type': 'multipart/form-data'
-                }
-            }).then(response => {
-                if (response.status === 200) console.log('solved date is updated.'); // console.log(JSON.parse(response.data.chat_log)); 테스트 해보니 잘 파싱 됨
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        }
-    }, [updateSolvedDateDidMount]);
     
     const handleSendMessage = (message) => {
         // message: 사용자가 form에 입력한 내용
@@ -301,24 +278,13 @@ const MessageForm = ({ quizId, word, quiz,
     }
 
     const isItTurnToWriting = async () => {
-        var writingCheck;
-
         // 사용자가 작문을 할 수 있는 조건이 되는 지 확인하기
         const response = await axios.get(process.env.REACT_APP_API_URL + '/study/writing/', {
             headers: {
                 'Authorization': `Token ${token}`,
             }
-        }).then(response => {
-            if (response.status === 200) writingCheck = response.data.quiz_words;
-        }).catch(error => {
-            writingCheck = null;
         });
-
-        if (writingCheck === null) {
-            setStep(501);
-        }
-        else {
-            // 사용자한테 작문 할거냐고 물어보기
+        if ((await response).status === 200) {
             addAiMessage(`잠시만요!`);
             await delay();
             addAiMessage(`${username} 님은 최근에 다섯 개 이상의 단어를 학습했고, 이제 '작문하기' 단계에 도전할 준비가 된 상태입니다.`);
@@ -330,6 +296,9 @@ const MessageForm = ({ quizId, word, quiz,
                 ...prevMessages,
                 { isUser: false, mode: 'areYouWantToWriting', id: Date.now(), step: step },
             ]);
+        }
+        else {
+            setStep(501);
         }
     }
 
@@ -411,8 +380,24 @@ const MessageForm = ({ quizId, word, quiz,
         }
     }
     
-    const endOfLearning = () => {
+    const endOfLearning = async () => {
         addAiMessage(`${Date()}, 학습을 종료합니다.`, step=-1);
+
+        const jsonString = JSON.stringify([
+            ...messages,
+            { text: `${Date()}, 학습을 종료합니다.`, isUser: false, id: Date.now(), step: -1},
+        ]);
+        const today = dateToTimestamp(Date());
+        const formData = new FormData();
+        formData.append('chat_log', jsonString);
+        formData.append('solved_date', today);
+        const response = await axios.patch(process.env.REACT_APP_API_URL + '/study/quiz/' + quizId + '/', formData, {
+            headers: {
+                'Authorization': `Token ${token}`,
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        if (response.status === 200) console.log('solved date is updated.'); // console.log(JSON.parse(response.data.chat_log)); 테스트 해보니 잘 파싱 됨
     }
     
     return (

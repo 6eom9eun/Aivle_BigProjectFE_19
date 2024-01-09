@@ -7,7 +7,7 @@ const MessageList = ({ token, quizId, studySentence,
     messages, setMessages, scrollRef, step, setStep, setAiIsTalking, writingWords, setWritingWords }) => {
     useEffect(() => {
         if (scrollRef.current) scrollRef.current.scrollIntoView({behavior: "smooth", block: "end"});
-        if (step !== -1) updateChatLog();
+        if ((step !== -1) && (step !== 501)) updateChatLog();
     }, [messages]);
 
     const updateChatLog = () => {

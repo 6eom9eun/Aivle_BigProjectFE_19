@@ -1,5 +1,5 @@
 import React from "react";
-import GoogleSymbol from "../../../assets/socialSymbol/GoogleSymbol.png";
+import NaverSymbol from "../../../assets/socialSymbol/NaverSymbol.png";
 
 const SocialNaver = ()=>
 {
@@ -13,8 +13,8 @@ const SocialNaver = ()=>
     }
     return(
     <>
-    <button onClick={handleLogin} type='button' className='w-full mt-2 grid grid-cols-[10%_90%] place-items-center p-2 text-black/[0.85] bg-[#F5F5F5] rounded-xl'>       
-        <img width={25} src={GoogleSymbol} />
+    <button onClick={handleLogin} type='button' className='w-full mt-2 grid grid-cols-[10%_90%] place-items-center p-2 text-black/[0.85] bg-[#03C75A] rounded-xl'>       
+        <img width={25} src={NaverSymbol} />
         <div className="font-normal">네이버 계정으로 로그인</div>
     </button>
     </>
