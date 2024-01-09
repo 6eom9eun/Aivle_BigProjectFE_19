@@ -13,13 +13,10 @@ function NaverRedirection({setIsLogin}) {
         axios.get(`http://127.0.0.1:8000/accounts/naver/callback/?code=${code}&state=${state}`, config
         )
             .then((res) => {
-                console.log(`========================================${res}=====================================`)
-                // const email = res.data.user.email
-                // const username = email.split('@')[0]
-                // sessionStorage.setItem('aivle19_username', username);
-                // sessionStorage.setItem('aivle19_token', res.data.token);
-                // setIsLogin(true);
-                // nav('/');
+                sessionStorage.setItem('aivle19_username', res.data.user.username);
+                sessionStorage.setItem('aivle19_token', res.data.token);
+                setIsLogin(true);
+                nav('/');
             }).catch(err => {
                 if(err.response) {
                     console.error(err.response.data.message);

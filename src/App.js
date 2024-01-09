@@ -16,6 +16,7 @@ import InfoUpdate from './pages/account/MyPage/InfoUpdate';
 import ProfileUpdate from './pages/account/MyPage/ProfileUpdate';
 import Board from './pages/board';
 import KakaoRedirection from './pages/account/LoginPage/KakaoRedirection';
+import NaverRedirection from './pages/account/LoginPage/NaverRedirection';
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
           <Route path="/profileUpdate" element={<PrivateRoute isThatTrue={isLogin} isTrue={<ProfileUpdate />} isFalse={<LoginPage />} />} />
           <Route path="/board/*" element={<PrivateRoute isThatTrue={isLogin} isTrue={<Board />} isFalse={<LoginPage />} />} />
           <Route path="/accounts/kakao/callback/" element={<KakaoRedirection setIsLogin={setIsLogin} />} />
+          <Route path="/accounts/naver/callback/" element={<NaverRedirection setIsLogin={setIsLogin} />} />
         </Routes>
 
         <Footer />
