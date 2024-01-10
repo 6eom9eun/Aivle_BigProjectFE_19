@@ -9,13 +9,14 @@ function RankPage() {
     const [isLoading, setIsLoading] = useState(true);
     const token = sessionStorage.getItem('aivle19_token');
     const [profiles, setProfiles] = useState({});
+    const [displayCount, setDisplayCount] = useState(10);
 
 
     let list = useAsyncList({
-    async load({signal, cursor}) {
-      if (cursor) {
-        setPage((prev) => prev + 1);
-      }
+      async load({signal, cursor}) {
+        if (cursor) {
+          setPage((prev) => prev + 1);
+        }
 
       const res = await fetch(cursor || process.env.REACT_APP_API_URL + "/rank/", {signal});
       let json = await res.json();
@@ -32,19 +33,32 @@ function RankPage() {
     },
   });
 
+  const [displayItems, setDisplayItems] = useState(list.items.slice(0, displayCount));
+
+    useEffect(() => {
+        setDisplayItems(list.items.slice(0, displayCount));
+    }, [list.items, displayCount]);
+
+    const loadMoreItems = () => {
+        // "더 보기" 버튼을 누르면 추가로 아이템을 보여줌
+        setDisplayCount(prevCount => prevCount + 2);
+    };
+
   const hasMore = page < 9;
+
+  
 
   return (
     <div className='flex'>
       <div className='w-0 lg:w-[320px] pt-[63px] lg:block hidden'>
         <GoToLatestAndQuizList />
       </div>
-      <div className='page pt-[99px] p-4' style={{fontFamily: 'JalnanGothic'}}>
+      <div className='page pt-[99px] p-4' style={{fontFamily: 'JalnanGothic', overflowY: 'auto', maxHeight: '200px'}}>
         <Table
           bottomContent={
             hasMore && !isLoading ? (
               <div className="flex w-full justify-center">
-                <Button isDisabled={list.isLoading} variant="flat" onPress={list.loadMore}>
+                <Button isDisabled={list.isLoading} variant="flat" onPress={loadMoreItems}>
                   {list.isLoading && <Spinner color="white" size="sm" />}
                   더 보기
                 </Button>
@@ -53,7 +67,7 @@ function RankPage() {
           }
           classNames={{
             base: "h-[100%] overflow-scroll",
-            table: "min-h-[666px]",
+            table: "min-h-[590px]",
           }}
         >
           <TableHeader>
@@ -64,11 +78,11 @@ function RankPage() {
           </TableHeader>
           <TableBody
             isLoading={isLoading}
-            items={list.items.map((item, index) => ({...item, rank: index + 1}))}
+            items={displayItems.map((item, index) => ({...item, rank: index + 1}))}
             loadingContent={<Spinner label="Loading..." />}
           >
             {(item, index) => (
-              <TableRow key={item.user_id}>
+              <TableRow key={item.user_id} style={{height: '50px'}}>
                 {(columnKey, cellIndex) => 
                   <TableCell style={{paddingLeft:'100px'}}>
                   {columnKey === 'username' ? ( 
