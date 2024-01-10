@@ -29,7 +29,7 @@ const GoToLatestAndQuizList = () => {
     }
 
     return (
-        <div>
+        <div style={{"font-family": "sans-serif"}}>
             <div className="mt-6 px-3">
                 {/* new chat */}
                 <div className="text-left text-[var(--color-info-900)]">

@@ -53,7 +53,7 @@ function App() {
           <Route path="/infoUpdate" element={<PrivateRoute isThatTrue={isLogin} isTrue={<InfoUpdate />} isFalse={<LoginPage />} />} />
           <Route path="/profileUpdate" element={<PrivateRoute isThatTrue={isLogin} isTrue={<ProfileUpdate />} isFalse={<LoginPage />} />} />
           <Route path="/board/*" element={<PrivateRoute isThatTrue={isLogin} isTrue={<Board />} isFalse={<LoginPage />} />} />
-          <Route path="/notice/*" element={<PrivateRoute isThatTrue={isLogin} isTrue={<Notice />} isFalse={<LoginPage />} />} />
+          <Route path="/notice/*" element={<Notice />} />
           <Route path="/accounts/kakao/callback/" element={<KakaoRedirection setIsLogin={setIsLogin} />} />
           <Route path="/accounts/naver/callback/" element={<NaverRedirection setIsLogin={setIsLogin} />} />
         </Routes>

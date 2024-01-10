@@ -7,7 +7,7 @@ import { IoMdLogOut, IoMdLogIn } from "react-icons/io";
 import { CiUser } from "react-icons/ci";
 import { FaRankingStar } from "react-icons/fa6";
 import { GoCommentDiscussion } from "react-icons/go";
-import { MdDeveloperMode } from "react-icons/md";
+import { MdDeveloperMode, MdOutlineNotificationImportant  } from "react-icons/md";
 
 const Sidebar = (props) => {
     return (
@@ -27,14 +27,6 @@ const Sidebar = (props) => {
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2">
-                                    <a href={process.env.PUBLIC_URL+"/myinfo"} className="flex justify-end hover:text-[var(--color-primary-500)]">
-                                        <CiUser size={25} />
-                                        <span>&nbsp;&nbsp;{props.username} 님</span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
                                 <td>
                                     <a href={process.env.PUBLIC_URL+"/rank"} className="flex justify-end hover:text-[var(--color-primary-500)]">
                                         <FaRankingStar size={25} />
@@ -42,7 +34,21 @@ const Sidebar = (props) => {
                                     </a>
                                 </td>
                                 <td>
-                                    <a href={process.env.PUBLIC_URL+"/board"} className="flex justify-end hover:text-[var(--color-primary-500)]">
+                                    <a href={process.env.PUBLIC_URL+"/myinfo"} className="flex justify-end hover:text-[var(--color-primary-500)] border-s-2">
+                                        <CiUser size={25} />
+                                        <span>&nbsp;&nbsp;{props.username} 님</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href={process.env.PUBLIC_URL+"/notice"} className="flex justify-end text-[var(--color-danger-500)] hover:text-[var(--color-primary-600)]">
+                                        <MdOutlineNotificationImportant size={25} />
+                                        <span>&nbsp;&nbsp;공지사항</span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href={process.env.PUBLIC_URL+"/board"} className="flex justify-end hover:text-[var(--color-primary-500)] border-s-2">
                                         <GoCommentDiscussion size={25} />
                                         <span>&nbsp;&nbsp;커뮤니티</span>
                                     </a>
@@ -88,6 +94,14 @@ const Sidebar = (props) => {
                                     <a href={process.env.PUBLIC_URL+"/we"} className="flex justify-end text-[var(--color-primary-900)] hover:text-[var(--color-primary-500)]">
                                         <MdDeveloperMode size={25} />
                                         <span>&nbsp;&nbsp;개발팀 소개</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <a href={process.env.PUBLIC_URL+"/notice"} className="flex justify-end text-[var(--color-danger-500)] hover:text-[var(--color-primary-600)]">
+                                        <MdOutlineNotificationImportant size={25} />
+                                        <span>&nbsp;&nbsp;공지사항</span>
                                     </a>
                                 </td>
                             </tr>

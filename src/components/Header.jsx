@@ -80,6 +80,7 @@ function Header(props) {
                         :
                         <div className="flex items-center gap-[2em]">
                             <a href={process.env.PUBLIC_URL+"/we"} className="text-[var(--color-primary-900)] hover:text-[var(--color-primary-600)]" >개발팀 소개</a>
+                            <a href={process.env.PUBLIC_URL+"/notice"} className="text-[var(--color-danger-500)] hover:text-[var(--color-primary-600)]" >공지사항</a>
                             <a href={process.env.PUBLIC_URL+"/login"} className="hover:text-[var(--color-primary-600)]">로그인</a>
                         </div>
                     }
