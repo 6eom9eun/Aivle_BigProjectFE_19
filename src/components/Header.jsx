@@ -69,6 +69,7 @@ function Header(props) {
                         props.isLogin ?
                         <div className="flex items-center gap-[2em]">
                             <a href={process.env.PUBLIC_URL+"/we"} className="text-[var(--color-primary-900)] hover:text-[var(--color-primary-600)]" >개발팀 소개</a>
+                            <a href={process.env.PUBLIC_URL+"/notice"} className="text-[var(--color-danger-500)] hover:text-[var(--color-primary-600)]" >공지사항</a>
                             <a href={process.env.PUBLIC_URL+"/board"} className="hover:text-[var(--color-primary-600)]" >커뮤니티</a>
                             <a href={process.env.PUBLIC_URL+"/rank"} className="flex hover:text-[var(--color-primary-600)]" >전체랭킹</a>
                             <a href={process.env.PUBLIC_URL+"/myinfo"} className="hover:text-[var(--color-primary-600)]" >{username} 님</a>
