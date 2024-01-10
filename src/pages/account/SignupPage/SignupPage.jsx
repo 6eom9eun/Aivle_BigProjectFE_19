@@ -3,6 +3,7 @@ import SignupForm from './SignupForm';
 import Description from '../LoginPage/Description';
 import TermsOfUseForm from './TermsOfUseForm';
 import './style.css';
+import Developers from '../../info/Developers';
 
 function SignupPage() {
   const [showSignupForm, setShowSignupForm] = useState(false);

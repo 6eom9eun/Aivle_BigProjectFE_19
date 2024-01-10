@@ -17,6 +17,7 @@ import ProfileUpdate from './pages/account/MyPage/ProfileUpdate';
 import Board from './pages/board';
 import KakaoRedirection from './pages/account/LoginPage/KakaoRedirection';
 import NaverRedirection from './pages/account/LoginPage/NaverRedirection';
+import Developers from './pages/info/Developers';
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
           <Route path="/quiz/:key" element={<PrivateRoute isThatTrue={isLogin} isTrue={<Main />} isFalse={<Info />} />}></Route>
           <Route path="/login" element={<LoginPage setIsLogin={setIsLogin} />} />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/we" element={<Developers />} />
           <Route path="/home" element={<Main />} />
           <Route path="/rank" element={<RankPage />} />
           <Route path="/myinfo" element={<PrivateRoute isThatTrue={isLogin} isTrue={<MyInfo />} isFalse={<LoginPage />} />} />
