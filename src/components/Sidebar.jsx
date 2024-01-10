@@ -3,10 +3,11 @@ import React, {useEffect, useRef, useState} from "react";
 import { useNavigate } from 'react-router-dom';
 import GoToLatestAndQuizList from "./GoToLatestAndQuizList";
 
-import { IoMdLogOut } from "react-icons/io";
-import { GoCommentDiscussion } from "react-icons/go";
-import { FaRankingStar } from "react-icons/fa6";
+import { IoMdLogOut, IoMdLogIn } from "react-icons/io";
 import { CiUser } from "react-icons/ci";
+import { FaRankingStar } from "react-icons/fa6";
+import { GoCommentDiscussion } from "react-icons/go";
+import { MdDeveloperMode } from "react-icons/md";
 
 const Sidebar = (props) => {
     return (
@@ -37,7 +38,7 @@ const Sidebar = (props) => {
                                 <td colspan="2">
                                     <a href={process.env.PUBLIC_URL+"/rank"} className="flex justify-end hover:text-[var(--color-primary-500)]">
                                         <FaRankingStar size={25} />
-                                        <span>&nbsp;&nbsp;전체랭킹 {props.userrank}위</span>
+                                        <span>&nbsp;&nbsp;전체랭킹</span>
                                     </a>
                                 </td>
                             </tr>
@@ -46,6 +47,14 @@ const Sidebar = (props) => {
                                     <a href={process.env.PUBLIC_URL+"/board"} className="flex justify-end hover:text-[var(--color-primary-500)]">
                                         <GoCommentDiscussion size={25} />
                                         <span>&nbsp;&nbsp;커뮤니티</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <a href={process.env.PUBLIC_URL+"/we"} className="flex justify-end text-[var(--color-primary-900)] hover:text-[var(--color-primary-500)]">
+                                        <MdDeveloperMode size={25} />
+                                        <span>&nbsp;&nbsp;개발팀 소개</span>
                                     </a>
                                 </td>
                             </tr>
@@ -63,18 +72,28 @@ const Sidebar = (props) => {
                             {/* </tr> */}
                         </table>
                         :
-                        <div className="w-[100%] text-right p-[10px]">
-                            <a href={process.env.PUBLIC_URL+'/login'} className="hover:text-[var(--color-primary-500)]">로그인</a>
-                        </div>
-                    }
-                </div>
-                <div>
-                    {
-                        props.isLogin ? <GoToLatestAndQuizList />
-                        : <div className="w-[100%] text-right p-[10px] text-sm">
-                            <div>로그인 정보가 없습니다.</div>
-                            <div>로그인하고 서비스를 이용해 보세요.</div>
-                        </div>
+                        <table className="w-[100%] text-right">
+                            <tr>
+                                <td colspan="2">
+                                    <a href={process.env.PUBLIC_URL+"/login"} className="flex justify-end hover:text-[var(--color-primary-500)]">
+                                        <IoMdLogIn size={25} />
+                                        <span>&nbsp;&nbsp;로그인</span>
+                                    </a>
+                                    <div className="w-[100%] text-right text-xs mt-2 mb-4">
+                                        <div>로그인 정보가 없습니다.</div>
+                                        <div>로그인하고 서비스를 이용해 보세요.</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <a href={process.env.PUBLIC_URL+"/we"} className="flex justify-end text-[var(--color-primary-900)] hover:text-[var(--color-primary-500)]">
+                                        <MdDeveloperMode size={25} />
+                                        <span>&nbsp;&nbsp;개발팀 소개</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
                     }
                 </div>
             </div>
