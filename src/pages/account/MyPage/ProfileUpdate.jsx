@@ -39,6 +39,14 @@ function ProfileUpdate() {
         setImage(file);
     };
 
+    const removeImageHandler = (e) => {
+        e.preventDefault();
+        const fileInput = document.getElementById("file-upload");
+        fileInput.value = "";
+        setImage(null);
+        setFileName('');
+    }
+
     const onAboutHandler = (e) => {
         setAbout(e.currentTarget.value);
         setAboutInitial(false);
@@ -60,13 +68,13 @@ function ProfileUpdate() {
                     "Authorization": `Token ${token}`,
                     "Content-Type": "multipart/form-data"
                 }
-            }) // 파일을 업로드할 엔드포인트 URL을 입력합니다.
+            })
             .then((response) => {
-                console.log('파일 업로드 성공:', response.data);
+                console.log('프로필 수정 성공:', response.data);
                 nav('/profile')
             })
             .catch((error) => {
-                console.error('파일 업로드 실패:', error);
+                console.error('프로필 수정 성공:', error);
             });
 
         }
@@ -121,7 +129,14 @@ function ProfileUpdate() {
                         </div>
                     </div>
                     <label htmlFor="file-upload" className="text-sm leading-6 text-gray-600">
-                        {fileName ? fileName : ""}
+                        {fileName ? (
+                            <div>
+                                {fileName}
+                                <button style={{color: 'red', paddingLeft: '5px'}} onClick={removeImageHandler}>❌</button>
+                            </div>
+                            ) : (
+                                ""
+                        )}
                     </label>
                     </div>
                     </div>
