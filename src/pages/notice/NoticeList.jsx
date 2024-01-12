@@ -73,9 +73,9 @@ function NoticeList() {
         >
             <TableHeader>
                 <TableColumn style={{textAlign: 'center', alignItems: 'center', width: '60%'}} key="title">글 제목</TableColumn>
-                <TableColumn style={{textAlign: 'center', alignItems: 'center', width: '20%', paddingRight: '80px'}} key="created_at">작성 시간</TableColumn>
+                <TableColumn style={{textAlign: 'center', alignItems: 'center', width: '40%'}} key="created_at">작성 시간</TableColumn>
             </TableHeader>
-            <TableBody items={items}>
+            <TableBody items={items} style={{textAlign: 'center', alignItems: 'center'}}>
                 {(item) => (
                 <TableRow className="cell-hover" key={item.id}>
                     {(columnKey) => 

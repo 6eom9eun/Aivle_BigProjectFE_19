@@ -74,7 +74,7 @@ function ArticleList() {
                 <TableColumn style={{textAlign: 'center', alignItems: 'center', width: '10%'}} key="username">작성자</TableColumn>
                 <TableColumn style={{textAlign: 'center', alignItems: 'center', width: '30%'}} key="created_at">작성 시간</TableColumn>
             </TableHeader>
-            <TableBody items={items}>
+            <TableBody items={items} style={{textAlign: 'center', alignItems: 'center'}}>
                 {(item) => (
                 <TableRow className="cell-hover" key={item.post_id}>
                     {(columnKey) => 

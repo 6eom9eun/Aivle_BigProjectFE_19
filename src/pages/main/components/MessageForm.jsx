@@ -108,24 +108,23 @@ const MessageForm = ({ quizId, word, quiz,
     }
 
     const correctJudge = async () => {
-        switch (message) {
-            case correctAnswer:
-                // 사용자가 원한다면 -> 학습 사이클 진행
-                setStep(102);
-                break;
-            default:
-                // 오답이었음과 정답이 뭐였는지 공개한 후, 학습 사이클 진행
-                setAiIsTalking(true);
-                addAiMessage(`오답입니다!\n\n위 문장에서 단어 '${word}'는 '${correctAnswer}'라는 의미로 사용되었습니다.`);
-                await delay();
-                addAiMessage(`🥲`);
-                await delay();
-                addAiMessage(`퀴즈의 정답을 맞히지 못한 단어에 대해서는 쓰기/읽기 학습을 수행해야 합니다.`);
-                await delay();
-                setAiIsTalking(false);
-                setStep(201);
-            };
+        if (message === correctAnswer) {
+            // 사용자가 원한다면 -> 학습 사이클 진행
+            setStep(102);
         }
+        else {
+            // 오답이었음과 정답이 뭐였는지 공개한 후, 학습 사이클 진행
+            setAiIsTalking(true);
+            addAiMessage(`오답입니다!\n\n위 문장에서 단어 '${word}'는 '${correctAnswer}'라는 의미로 사용되었습니다.`);
+            await delay();
+            addAiMessage(`🥲`);
+            await delay();
+            addAiMessage(`퀴즈의 정답을 맞히지 못한 단어에 대해서는 쓰기/읽기 학습을 수행해야 합니다.`);
+            await delay();
+            setAiIsTalking(false);
+            setStep(201);
+        }
+    }
     
     const guideToCorrect = async () => {
         setAiIsTalking(true);

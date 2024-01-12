@@ -10,7 +10,7 @@ function UserProfile2({ userId, token, profiles, setProfiles }) {
       if (profiles[userId]) {
         setProfile(profiles[userId]);
       } else {
-        axios.get(`http://127.0.0.1:8000//accounts/profile/${userId}/`, {
+        axios.get(process.env.REACT_APP_API_URL + `/accounts/profile/${userId}/`, {
             headers: {
                 'Authorization': `Token ${token}`
             }

@@ -10,7 +10,7 @@ function NaverRedirection({setIsLogin}) {
     useEffect(() => {
         const config = {"Content-Type": 'application/json'};
         
-        axios.get(`http://127.0.0.1:8000/accounts/naver/callback/?code=${code}&state=${state}`, config
+        axios.get(process.env.REACT_APP_API_URL + `/accounts/naver/callback/?code=${code}&state=${state}`, config
         )
             .then((res) => {
                 sessionStorage.setItem('aivle19_username', res.data.user.username);
@@ -26,7 +26,11 @@ function NaverRedirection({setIsLogin}) {
             })
     }, []);
   
-    return <div className='pt-[63px] min-h-screen' style={{fontFamily: 'JalnanGothic'}}>로그인 중입니다.</div>;
+    return (
+        <div className='pt-[63px] h-screen m-auto flex justify-center items-center text-3xl' style={{fontFamily: 'JalnanGothic'}}>
+            로그인 중입니다..
+        </div>
+    );
 
   };
 
